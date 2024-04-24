@@ -1,6 +1,9 @@
 package items
 
 const BROWN = 0
+const GREY = 1
+const YELLOW = 2
+const RED = 3
 
 const RED_SCIENCE = 0
 const GREEN_SCIENCE = 1
@@ -112,6 +115,3 @@ func IsGuessCorrect(guess string, correct string) GuessResponse {
 func getItem(name string) Item {
 	return WOODEN_CHEST
 }
-
-
-var WOODEN_CHEST = Item{"wooden-chest", []int{BROWN}, []string{"wood"}, LOGISTICS, RED_SCIENCE, 0.5}
