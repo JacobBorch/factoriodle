@@ -1,0 +1,9 @@
+type
+color
+ingredients
+science requisite
+production time
+
+items enumerated from 0. 
+mats and recipes: 0-61 (62 items)
+production: 
