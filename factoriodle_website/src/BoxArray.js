@@ -1,22 +1,14 @@
-import React from 'react';
-import SquareBox from './SquareBox'; // Ensure this path is correct
+import React from "react";
+import SquareBox from "./SquareBox";
 
 function BoxArray() {
-  const containerStyle = {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    gap: '20px', // This sets the space between the boxes
-    height: '100vh', // This makes sure the container takes full viewport height
-  };
-
   return (
-    <div style={containerStyle}>
-      <SquareBox>Box 1</SquareBox>
-      <SquareBox>Box 2</SquareBox>
-      <SquareBox>Box 3</SquareBox>
-      <SquareBox>Box 4</SquareBox>
-      <SquareBox>Box 5</SquareBox>
+    <div class="carousel carousel-center max-w-md p-4 space-x-4 bg-neutral rounded-box">
+      <SquareBox size={100} />
+      <SquareBox size={100} />
+      <SquareBox size={100} />
+      <SquareBox size={100} />
+      <SquareBox size={100} />
     </div>
   );
 }

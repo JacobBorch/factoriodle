@@ -24,7 +24,7 @@ func enableCORS(w *http.ResponseWriter) {
 
 func main() {
 	http.HandleFunc("/echo", handleGuess)
-
+	
 	fmt.Println("Server starting on port 8000...")
 	if err := http.ListenAndServe(":8000", nil); err != nil {
 		fmt.Println("Error starting server: ", err)
