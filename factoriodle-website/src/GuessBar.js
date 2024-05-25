@@ -5,6 +5,7 @@ function GuessBar({ guessHandler }) {
       return;
     }
     guessHandler(e.target.value);
+    e.target.value = "";
   };
 
   return (
