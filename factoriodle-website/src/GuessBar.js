@@ -3,14 +3,25 @@ import Select from "react-select";
 
 function GuessBar({ guessHandler }) {
   const initialOptions = [
-    { value: 'chocolate', label: 'Chocolate' },
-    { value: 'strawberry', label: 'Strawberry' },
-    { value: 'vanilla', label: 'Vanilla' }
+    { value: "chocolate", label: "Chocolate" },
+    { value: "strawberry", label: "Strawberry" },
+    { value: "vanilla", label: "Vanilla" },
   ];
 
   const [options, setOptions] = useState(initialOptions);
   const [selectedOption, setSelectedOption] = useState(null);
   const [inputValue, setInputValue] = useState("");
+
+  const findMatchingIndex = (value) => {
+    return options.findIndex(
+      (option) => option.value.toLowerCase() === value.toLowerCase()
+    );
+  }
+
+  const removeOption = (matchingIdx) => {
+    const newOptions = options.filter((_, idx) => idx !== matchingIdx);
+    setOptions(newOptions);
+  }
 
   const handleKeyDown = (e) => {
     if (e.key !== "Enter") {
@@ -19,37 +30,24 @@ function GuessBar({ guessHandler }) {
     if (!selectedOption) {
       return;
     }
-
-    const matchingIdx = options.findIndex(
-      (option) => option.value.toLowerCase() === selectedOption.value.toLowerCase()
-    );
-    if (matchingIdx === -1) {
-      return;
-    }
-
-    const matching = options[matchingIdx];
-    const newOptions = options.filter((_, idx) => idx !== matchingIdx);
-    setOptions(newOptions);
-    guessHandler(matching.value);
-    setSelectedOption(null);
-    setInputValue(""); // Clear the input value
+    handleChange(selectedOption);
   };
 
   const handleChange = (selected) => {
     setSelectedOption(selected);
-    if (selected) {
-      const matchingIdx = options.findIndex(
-        (option) => option.value.toLowerCase() === selected.value.toLowerCase()
-      );
-      if (matchingIdx !== -1) {
-        const matching = options[matchingIdx];
-        const newOptions = options.filter((_, idx) => idx !== matchingIdx);
-        setOptions(newOptions);
-        guessHandler(matching.value);
-        setSelectedOption(null);
-        setInputValue(""); // Clear the input value after selection
-      }
+    if (!selected) {
+      return;
     }
+    const matchingIdx = findMatchingIndex(selected.value);
+    if (matchingIdx === -1) {
+      return;
+    }
+    const matching = options[matchingIdx];
+    removeOption(matchingIdx);
+    
+    guessHandler(matching.value);
+    setSelectedOption(null);
+    setInputValue(""); // Clear the input value after selection
   };
 
   const handleInputChange = (newValue) => {
