@@ -1,16 +1,22 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Select from "react-select";
 
 function GuessBar({ guessHandler }) {
-  const initialOptions = [
-    { value: "chocolate", label: "Chocolate" },
-    { value: "strawberry", label: "Strawberry" },
-    { value: "vanilla", label: "Vanilla" },
-  ];
+
+  const initialOptions = [ { value: "test", label: "test" } ];
 
   const [options, setOptions] = useState(initialOptions);
   const [selectedOption, setSelectedOption] = useState(null);
   const [inputValue, setInputValue] = useState("");
+
+  useEffect(() => {
+    fetch("http://localhost:8000/itemNames")
+      .then((response) => response.json())
+      .then((data) => {
+        setOptions(data.map((item) => ({ value: item, label: item })));
+      })
+      .catch((error) => console.error("Error fetching request: ", error));
+  }, []);
 
   const findMatchingIndex = (value) => {
     return options.findIndex(
@@ -47,7 +53,7 @@ function GuessBar({ guessHandler }) {
     
     guessHandler(matching.value);
     setSelectedOption(null);
-    setInputValue(""); // Clear the input value after selection
+    setInputValue("");
   };
 
   const handleInputChange = (newValue) => {

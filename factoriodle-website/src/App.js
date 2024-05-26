@@ -5,26 +5,21 @@ import { useState } from "react";
 function App() {
   const [guesses, setGuesses] = useState([]);
 
-  const queryGuess = async (guess) => {
-    try {
-      const response = await fetch(
-        `http://localhost:8000/guess?input=${encodeURIComponent(guess)}`,
-        {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
-      if (!response.ok) {
-        throw new Error("Network response was not ok");
+  const queryGuess = (guess) => {
+    return fetch(
+      `http://localhost:8000/guess?input=${encodeURIComponent(guess)}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
       }
-      const result = await response.json();
-      return result;
-    } catch (error) {
-      console.error("Error fetching request: ", error);
-      return {};
-    }
+    )
+      .then((response) => response.json())
+      .catch((error) => {
+        console.error("Error fetching request: ", error);
+        return {};
+      });
   };
 
   const handleGuess = async (guess) => {

@@ -101,21 +101,14 @@ func compareCraftingTime(correct float32, guess float32) int {
 	return 2
 }
 
-func GetGuessResponse(guess string, correct string) GuessResponse {
-	guessedItem := getItem(guess)
-	correctItem := getItem(correct)
+func GetGuessResponse(guess Item, correct Item) GuessResponse {
 	return GuessResponse{
-		compareSlice[int](correctItem.Color, guessedItem.Color),
-		compareSlice[string](correctItem.Ingredients, guessedItem.Ingredients),
-		compareCategory(correctItem.Category, guessedItem.Category),
-		compareScience(correctItem.Science, guessedItem.Science),
-		compareCraftingTime(correctItem.CraftingTime, guessedItem.CraftingTime),
-		guessedItem,
+		compareSlice[int](correct.Color, guess.Color),
+		compareSlice[string](correct.Ingredients, guess.Ingredients),
+		compareCategory(correct.Category, guess.Category),
+		compareScience(correct.Science, guess.Science),
+		compareCraftingTime(correct.CraftingTime, guess.CraftingTime),
+		guess,
 	}
-}
-
-
-func getItem(name string) Item {
-	return TRANSPORT_BELT
 }
 

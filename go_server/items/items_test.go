@@ -7,7 +7,6 @@ import (
 )
 
 func TestWoodIsEqualToWood(t *testing.T) {
-	item_name := "Wooden chest"
-	res := GetGuessResponse(item_name, item_name)
+	res := GetGuessResponse(WOODEN_CHEST, WOODEN_CHEST)
 	assert.Equal(t, GuessResponse{2, 2, 2, 2, 2, WOODEN_CHEST}, res)
 }
