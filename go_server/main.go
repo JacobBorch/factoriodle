@@ -50,6 +50,7 @@ func handleGetItemNames(w http.ResponseWriter, r *http.Request) {
 	w.Write(jsonResponse)
 }
 
+
 func handleGuess(w http.ResponseWriter, r *http.Request) {
 	enableCORS(&w)
 	input := r.URL.Query().Get("input")
@@ -58,7 +59,6 @@ func handleGuess(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "No input provided", http.StatusBadRequest)
 		return
 	}
-
 	logic := NewInMemoryGuessLogic(todaysCorrect())
 	response := logic.MakeGuess(input)
 

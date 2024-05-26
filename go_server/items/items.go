@@ -111,4 +111,3 @@ func GetGuessResponse(guess Item, correct Item) GuessResponse {
 		guess,
 	}
 }
-

@@ -1,7 +1,6 @@
 import Square from "./Square";
 
-function SquareArray({guess}) {
-
+function SquareArray({ guess }) {
   const scienceFunction = (scienceCode) => {
     switch (scienceCode) {
       case 0:
@@ -19,7 +18,7 @@ function SquareArray({guess}) {
       default:
         return "unknown";
     }
-  }
+  };
 
   const categoryFunction = (categoryCode) => {
     switch (categoryCode) {
@@ -34,7 +33,7 @@ function SquareArray({guess}) {
       default:
         return "unknown";
     }
-  }
+  };
 
   const colorFunction = (colorCode) => {
     switch (colorCode) {
@@ -54,44 +53,54 @@ function SquareArray({guess}) {
   const strategyFunction = (key, value) => {
     switch (key) {
       case "Color":
-        return value.slice().map((color) => colorFunction(color)).join(", ");
+        return value
+          .slice()
+          .map((color) => colorFunction(color))
+          .join(", ");
       case "Ingredients":
         return value.slice().join(", ");
       case "Category":
         return categoryFunction(value);
       case "Science":
         return scienceFunction(value) + " science";
+      case "CraftingTime":
+        return value + "s";
       default:
         return value;
     }
   };
 
   const parseItemResponse = (item) => {
-    const result = Object.keys(item).filter((key) => key !== "Name").map((key) => {
-      return strategyFunction(key, item[key]);
-    });
+    const result = Object.keys(item)
+      .filter((key) => key !== "Name")
+      .map((key) => {
+        return strategyFunction(key, item[key]);
+      });
     return result;
   };
 
   const parseColors = (guess) => {
-    return Object.keys(guess).filter((key) => key !== "Item").map((key) => {
-      return guess[key];
-    });
+    return Object.keys(guess)
+      .filter((key) => key !== "Item")
+      .map((key) => {
+        return guess[key];
+      });
   };
 
   const itemText = guess.Item.Name;
   const guessText = parseItemResponse(guess.Item);
   const guessColors = parseColors(guess);
 
-    return (
-      <div className="flex">
-        <Square text={itemText} color={3}></Square>
-        {guessText.map((guess, index) => {
-          return <Square key={index} text={guess} color={guessColors[index]}></Square>
-        })}
-      </div>
-    );
-  }
-  
-  export default SquareArray;
-  
+  return (
+    <div className="flex">
+      <Square text={itemText} color={3}></Square>
+      {guessText.map((guess, index) => {
+        return (
+          <Square key={index} text={guess} color={guessColors[index]}></Square>
+        );
+      })}
+    </div>
+  );
+}
+
+export default SquareArray;

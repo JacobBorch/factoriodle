@@ -19,7 +19,7 @@ func (l InMemoryGuessLogic) MakeGuess(input string) items.GuessResponse {
 	correct := l.itemMap[l.correct]
 	if !ok {
 		fmt.Println("Item not found: ", input)
-		return items.GuessResponse{Item: items.Item{}}
+		return items.GetGuessResponse(items.ERROR_ITEM, correct)
 	}
 	return items.GetGuessResponse(item, correct)
 }

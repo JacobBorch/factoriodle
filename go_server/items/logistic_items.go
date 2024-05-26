@@ -1,5 +1,7 @@
 package items
 
+var ERROR_ITEM = Item{"Error", []int{-1}, []string{"Error"}, -1, -1, -1}
+
 var WOODEN_CHEST = Item{"Wooden chest", []int{BROWN}, []string{"wood"}, LOGISTICS, RED_SCIENCE, 0.5}
 var IRON_CHEST = Item{"Iron chest", []int{GREY}, []string{"Iron plate"}, LOGISTICS, RED_SCIENCE, 0.5}
 
